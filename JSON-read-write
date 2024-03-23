@@ -1,0 +1,21 @@
+func readJSONFile(filename string, v interface{}) error {
+    file, err := ioutil.ReadFile(filename)
+    if err != nil {
+        return err
+    }
+    if err := json.Unmarshal(file, v); err != nil {
+        return err
+    }
+    return nil
+}
+
+func writeJSONFile(filename string, v interface{}) error {
+    data, err := json.MarshalIndent(v, "", "    ")
+    if err != nil {
+        return err
+    }
+    if err := ioutil.WriteFile(filename, data, 0644); err != nil {
+        return err
+    }
+    return nil
+}
